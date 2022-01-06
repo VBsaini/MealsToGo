@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, SafeAreaView, Platform, StatusBar } from "react-native";
+import { SafeAreaView, Platform, StatusBar } from "react-native";
 import { Searchbar } from "react-native-paper";
 import { RestaurantInfoCard } from "../components/restuarant-info-card";
 import styled from "styled-components/native";
@@ -32,16 +32,3 @@ export const RestaurantScreen = () => {
     </SafeArea>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-  statusBar: {
-    padding: 15,
-  },
-  screen: {
-    flex: 1,
-    padding: 15,
-  },
-});
