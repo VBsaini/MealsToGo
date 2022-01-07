@@ -22,10 +22,11 @@ export const RestaurantInfoCard = ({ restaurant = {} }) => {
     photos = [
       "https://www.foodiesfeed.com/wp-content/uploads/2019/06/top-view-for-box-of-2-burgers-home-made-600x899.jpg",
     ],
-    address = "100 some random street",
+    vicinity = "100 some random street",
     isOpenNow = true,
     rating = 4,
     isClosedTemporarily = true,
+    placeId,
   } = restaurant;
 
   const ratingArray = Array.from(new Array(Math.floor(rating)));
@@ -38,7 +39,12 @@ export const RestaurantInfoCard = ({ restaurant = {} }) => {
         <SvgContainer>
           <StarsContainer>
             {ratingArray.map((item, i) => (
-              <SvgXml key={i} xml={star} width={15} height={15} />
+              <SvgXml
+                key={`star-${placeId}-${i}`}
+                xml={star}
+                width={15}
+                height={15}
+              />
             ))}
           </StarsContainer>
           <ContainerEnd>
@@ -53,7 +59,7 @@ export const RestaurantInfoCard = ({ restaurant = {} }) => {
             </Spacer>
           </ContainerEnd>
         </SvgContainer>
-        <Address>{address}</Address>
+        <Address>{vicinity}</Address>
       </Info>
     </ResCard>
   );

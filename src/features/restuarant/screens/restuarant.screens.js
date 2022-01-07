@@ -1,34 +1,45 @@
-import React from "react";
-import { SafeAreaView, Platform, StatusBar } from "react-native";
-import { Searchbar } from "react-native-paper";
+import React, { useContext } from "react";
+import { FlatList } from "react-native";
+import { ActivityIndicator, Colors } from "react-native-paper";
 import { RestaurantInfoCard } from "../components/restuarant-info-card";
 import styled from "styled-components/native";
+import { SafeArea } from "../../../components/utility/safe-area";
+import { RestaurantContext } from "../../../services/restaurant/restaurant.context";
+import { Search } from "../components/search";
 
-const isAndroid = Platform.OS === "android";
+const RestaurantList = styled(FlatList).attrs({
+  contentContainerStyle: {
+    padding: 16,
+  },
+})``;
 
-const SafeArea = styled(SafeAreaView)`
-  flex: 1;
-  ${isAndroid && `margin-top:${StatusBar.currentHeight}px`};
+const Loading = styled(ActivityIndicator)`
+  margin-left: -25px;
+`;
+const LoadingContainer = styled.View`
+  position: absolute;
+  top: 50%;
+  left: 50%;
 `;
 
-const SearchContainer = styled.View`
-  padding: ${(props) => props.theme.space[3]};
-`;
+export const RestaurantScreen = ({}) => {
+  const { restaurants, isLoading } = useContext(RestaurantContext);
 
-const RestaurantListContainer = styled.View`
-  flex: 1;
-  padding: ${(props) => props.theme.space[3]};
-`;
-
-export const RestaurantScreen = () => {
   return (
     <SafeArea>
-      <SearchContainer>
-        <Searchbar />
-      </SearchContainer>
-      <RestaurantListContainer>
-        <RestaurantInfoCard />
-      </RestaurantListContainer>
+      {isLoading && (
+        <LoadingContainer>
+          <Loading size={50} animating={true} color={Colors.blue300} />
+        </LoadingContainer>
+      )}
+      <Search />
+      <RestaurantList
+        data={restaurants}
+        renderItem={({ item }) => {
+          return <RestaurantInfoCard restaurant={item} />;
+        }}
+        keyExtractor={(item) => item.name}
+      />
     </SafeArea>
   );
 };
