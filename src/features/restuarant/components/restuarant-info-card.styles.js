@@ -3,11 +3,11 @@ import { Card } from "react-native-paper";
 
 export const ResCard = styled(Card)`
   background-color: ${(props) => props.theme.colors.bg.primary}
+  padding: ${(props) => props.theme.space[3]};
   margin-bottom: ${(props) => props.theme.space[3]};
 `;
 
 export const ResCardCover = styled(Card.Cover)`
-  padding: ${(props) => props.theme.space[3]};
   background-color: ${(props) => props.theme.colors.bg.primary};
 `;
 
@@ -18,8 +18,9 @@ export const Address = styled.Text`
 `;
 
 export const Info = styled.View`
-  padding: ${(props) => props.theme.space[3]};
+  padding-top: ${(props) => props.theme.space[3]};
 `;
+
 export const StarsContainer = styled.View`
   flex-direction: row;
   padding-top: ${(props) => props.theme.space[2]};
